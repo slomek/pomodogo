@@ -25,9 +25,9 @@ func main() {
 			break
 		}
 		min, sec := screenutils.FormatSeconds(left)
-		progress := screenutils.ShowProgressBar(total, left)
+		progress := screenutils.ProgressBar(total, left)
 		fmt.Printf("\r%02d:%02d %s", min, sec, progress)
-		left -= 1
+		left--
 	}
 
 	notifications.PomodoroFinishNotification()

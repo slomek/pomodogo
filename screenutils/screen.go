@@ -26,7 +26,8 @@ func columnsCount() int {
 	return int(ws.Col)
 }
 
-func ShowProgressBar(total int, left int) string {
+// ProgressBar is responsible for preparing pretty progress bar as ASCII-art.
+func ProgressBar(total int, left int) string {
 	all := columnsCount() - 6
 
 	leftPercent := all * left / total
@@ -38,6 +39,7 @@ func ShowProgressBar(total int, left int) string {
 	return completedBlocks + leftBlocks
 }
 
+// FormatSeconds splits given number of seconds into a pair of minutes and seconds.
 func FormatSeconds(seconds int) (int, int) {
 	m := seconds / 60
 	s := seconds % 60

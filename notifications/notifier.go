@@ -24,6 +24,7 @@ func getImagePath(fileName string) string {
 	return fmt.Sprintf("%s/%s", dir, fileName)
 }
 
+// PomodoroFinishNotification displays system notification about finished Pomodoro period.
 func PomodoroFinishNotification() {
 	showMessage("Your pomodoGo has finished! Time for a break!")
 }
