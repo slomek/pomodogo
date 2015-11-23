@@ -3,9 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"strings"
 	"time"
-
 
 	"github.com/slomek/pomodogo/notifications"
 	"github.com/slomek/pomodogo/screenutils"
@@ -26,32 +24,11 @@ func main() {
 		if left < 0 {
 			break
 		}
-		min, sec := formatSeconds(left)
-		progress := progressBar(total, left)
+		min, sec := screenutils.FormatSeconds(left)
+		progress := screenutils.ShowProgressBar(total, left)
 		fmt.Printf("\r%02d:%02d %s", min, sec, progress)
 		left -= 1
 	}
-	notifications.ShowMessage("End")
+
+	notifications.PomodoroFinishNotification()
 }
-
-func formatSeconds(seconds int) (int, int) {
-	m := seconds / 60
-	s := seconds % 60
-	return m, s
-}
-
-func progressBar(total int, left int) string {
-	all := screenutils.ColumnsCount() - 6
-
-	leftPercent := all * left / total
-	complPercent := all - leftPercent
-
-	completedBlocks := strings.Repeat("█", complPercent)
-	leftBlocks := strings.Repeat("▒", leftPercent)
-
-	return completedBlocks + leftBlocks
-}
-
-
-
-

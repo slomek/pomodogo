@@ -3,6 +3,7 @@ package screenutils
 import (
 	"syscall"
 	"unsafe"
+	"strings"
 )
 
 type winsize struct {
@@ -12,7 +13,7 @@ type winsize struct {
 	Ypixel uint16
 }
 
-func ColumnsCount() int {
+func columnsCount() int {
 	ws := &winsize{}
 	retCode, _, errno := syscall.Syscall(syscall.SYS_IOCTL,
 		uintptr(syscall.Stdin),
@@ -23,4 +24,22 @@ func ColumnsCount() int {
 		panic(errno)
 	}
 	return int(ws.Col)
+}
+
+func ShowProgressBar(total int, left int) string {
+	all := columnsCount() - 6
+
+	leftPercent := all * left / total
+	complPercent := all - leftPercent
+
+	completedBlocks := strings.Repeat("█", complPercent)
+	leftBlocks := strings.Repeat("▒", leftPercent)
+
+	return completedBlocks + leftBlocks
+}
+
+func FormatSeconds(seconds int) (int, int) {
+	m := seconds / 60
+	s := seconds % 60
+	return m, s
 }

@@ -2,13 +2,15 @@ package notifications
 
 import "github.com/0xAX/notificator"
 
-var notify *notificator.Notificator
+var notify = notificator.New(notificator.Options{
+	DefaultIcon: "icon/default.png",
+	AppName:     "PomodoGo",
+})
 
-func ShowMessage(message string) {
-	notify = notificator.New(notificator.Options{
-		DefaultIcon: "icon/default.png",
-		AppName:     "My test App",
-	})
+func showMessage(message string) {
+	notify.Push("PomodoGo!", message, "", notificator.UR_CRITICAL)
+}
 
-	notify.Push("title", message, "/home/user/icon.png", notificator.UR_CRITICAL)
+func PomodoroFinishNotification() {
+	showMessage("Your pomodoGo has finished! Time for a break!")
 }
