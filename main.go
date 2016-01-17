@@ -9,16 +9,16 @@ import (
 	"github.com/slomek/pomodogo/screenutils"
 )
 
-var duration int
+var duration time.Duration
 
 func init() {
-	flag.IntVar(&duration, "duration", 25, "Duration of your Pomodoro")
+	flag.DurationVar(&duration, "duration", 25*time.Minute, "Duration of your Pomodoro")
 }
 
 func main() {
 	flag.Parse()
 
-	total := duration * 60
+	total := int(duration.Seconds())
 	left := total
 	for range time.Tick(time.Second) {
 		if left < 0 {

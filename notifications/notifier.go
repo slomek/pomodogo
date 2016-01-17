@@ -1,10 +1,11 @@
 package notifications
 
 import (
-	"github.com/0xAX/notificator"
 	"path/filepath"
 	"os"
 	"fmt"
+
+	"github.com/0xAX/notificator"
 )
 
 var notify = notificator.New(notificator.Options{
