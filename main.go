@@ -30,5 +30,5 @@ func main() {
 		left--
 	}
 
-	notifications.PomodoroFinishNotification()
+	notifications.Finish()
 }
