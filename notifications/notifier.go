@@ -12,7 +12,8 @@ import (
 var imagePath string
 
 func init() {
-	flag.StringVar(&imagePath, "icon", "~/pomogodo/icon.png", "location of notification icon")
+	defaultIconLocation := fmt.Sprintf("%s/%s", os.Getenv("HOME"), "pomodogo/icon.png")
+	flag.StringVar(&imagePath, "icon", defaultIconLocation, "location of notification icon")
 }
 
 var notify = notificator.New(notificator.Options{
